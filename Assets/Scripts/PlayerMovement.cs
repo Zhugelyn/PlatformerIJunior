@@ -10,6 +10,9 @@ public class PlayerMovement : MonoBehaviour
     private bool _isRight = true;
     private int _movementToRight = 1;
 
+    private int _speedHash = Animator.StringToHash("Speed");
+    private int _jumpHash = Animator.StringToHash("Jump");
+
     private void Update()
     {
         HorizontalMovement();
@@ -34,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            _animator.SetFloat("Speed", 0);
+            _animator.SetFloat(_speedHash, 0);
         }
 
     }
@@ -42,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     private void Run(int direction)
     {
         transform.Translate(_speed * Time.deltaTime * direction, 0, 0);
-        _animator.SetFloat("Speed", _speed);
+        _animator.SetFloat(_speedHash, _speed);
     }
 
     private void Jump()
@@ -50,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             _rigidbody2D.AddForce(Vector2.up * _forceJump);
-            _animator.SetTrigger("Jump");
+            _animator.SetTrigger(_jumpHash);
         }
     }
 
