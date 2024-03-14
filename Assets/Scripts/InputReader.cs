@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class InputReader : MonoBehaviour
 {
-    private const string JumpInput = "Jump";
     private const string HorizontalAxis = "Horizontal";
     private const string VerticalAxis = "Vertical";
 
@@ -12,7 +11,9 @@ public class InputReader : MonoBehaviour
 
     public float GetVerticalAxisInput() => Input.GetAxisRaw(VerticalAxis);
 
-    public bool GetJumpInput() => Input.GetButtonDown(JumpInput);
+    public bool GetJumpInput() => Input.GetKeyDown(KeyCode.W);
 
     public bool GetAttackInput() => Input.GetKeyDown(KeyCode.Mouse0);
+
+    public bool GetBoostInput() => Input.GetKey(KeyCode.LeftShift);
 }

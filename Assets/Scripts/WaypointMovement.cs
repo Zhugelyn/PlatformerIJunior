@@ -18,7 +18,7 @@ public class WaypointMovement : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void MoveToPoint()
     {
         Transform target = _points[_currentPoint];
 
@@ -39,8 +39,6 @@ public class WaypointMovement : MonoBehaviour
 
     private void Flip()
     {
-        Vector3 currentScale = transform.localScale;
-        currentScale.x *= -1;
-        transform.localScale = currentScale;
+        transform.Rotate(0f, 180f, 0f);
     }
 }
