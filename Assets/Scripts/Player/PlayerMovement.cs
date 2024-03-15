@@ -89,7 +89,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Flip()
     {
-        transform.Rotate(0, 180f, 0);
+        Vector3 currentScale = transform.localScale;
+        currentScale.x *= -1;
+        transform.localScale = currentScale;
+
         _isRight = !_isRight;
     }
 }

@@ -11,9 +11,9 @@ public class EnemyPatrolAttack : MonoBehaviour, IRangeWeapon
 
     public float ShotDelay => _shotDelay;
 
-    public void Shoot(Vector3 shotDirection)
+    public void Shoot(Vector3 targetPositon)
     {
-        var direction = (shotDirection - transform.position).normalized;
+        var direction = (targetPositon - transform.position).normalized;
         var bullet = Instantiate(_bulletPrefab, _shootingPoint.transform.position, Quaternion.identity);
         bullet.AddForce(direction * _force, _forceMode2D);
     }

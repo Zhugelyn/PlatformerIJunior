@@ -39,6 +39,8 @@ public class WaypointMovement : MonoBehaviour
 
     private void Flip()
     {
-        transform.Rotate(0f, 180f, 0f);
+        Vector3 currentScale = transform.localScale;
+        currentScale.x *= -1;
+        transform.localScale = currentScale;
     }
 }

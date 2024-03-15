@@ -2,20 +2,11 @@ using UnityEngine;
 
 public class CoinSelection : MonoBehaviour
 {
-    private void OnEnable()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        SelectionItem.TakeItem += CheckLiftedItem;
-    }
-
-    private void OnDisable()
-    {
-        SelectionItem.TakeItem -= CheckLiftedItem;
-    }
-
-    private void CheckLiftedItem(GameObject gameObject, Player player)
-    {
-        if (gameObject.TryGetComponent(out Coin coin))
+        if (collision.gameObject.TryGetComponent(out Player player))
         {
+            Coin coin = gameObject.GetComponent<Coin>();
             player.AddCoin(coin.AmountCoinsAdded);
             Destroy(coin.gameObject);
         }
