@@ -8,7 +8,7 @@ public class Player : MonoBehaviour, IDamagable, IAttacking
 
     private int _amountCoint = 0;
     private int _maxHealth = 100;
-    [SerializeField] private int _health;
+    private int _health;
     private InputReader _inputReader = new InputReader();
 
     private void Awake()
