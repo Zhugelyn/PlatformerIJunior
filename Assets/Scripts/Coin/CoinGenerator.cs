@@ -13,7 +13,7 @@ public class CoinGenerator : MonoBehaviour
 
         for (int i = 0; i < _spawns.Length; i++)
         {
-            _spawns[i] = _spawnCoins.GetChild(i).transform;
+            _spawns[i] = _spawnCoins.GetChild(i);
         }
     }
 

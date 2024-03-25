@@ -1,19 +1,21 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour, IDamagable, IAttacking
+public class Player : MonoBehaviour, IAttacking
 {
     [SerializeField] private Rigidbody2D _bulletPrefab;
     [SerializeField] private Transform _spawnBullet;
     [SerializeField] private PlasmaGun _gun;
 
     private int _amountCoint = 0;
-    private int _maxHealth = 100;
-    private int _health;
     private InputReader _inputReader = new InputReader();
+
+    public int MaxHealth { get; private set; } = 100;
+    public Health Health { get; private set; }
 
     private void Awake()
     {
-        _health = _maxHealth;
+        Health = new Health();
+        Health.Init(MaxHealth);
     }
 
     private void Update()
@@ -21,14 +23,14 @@ public class Player : MonoBehaviour, IDamagable, IAttacking
         Attack();
     }
 
-    public void RestoreHealth(int amountHealtRestore)
+    private void OnEnable()
     {
-        bool isMoreMaxHealth = _health + amountHealtRestore > _maxHealth ? true : false;
+        Health.HealthDecreased += CheckHealth;
+    }
 
-        if (isMoreMaxHealth)
-            _health = _maxHealth;
-
-        _health += amountHealtRestore;
+    private void OnDisable()
+    {
+        Health.HealthDecreased -= CheckHealth;
     }
 
     public void AddCoin(int amountCoin)
@@ -44,11 +46,9 @@ public class Player : MonoBehaviour, IDamagable, IAttacking
         }
     }
 
-    public void TakeDamge(int damage)
+    public void CheckHealth()
     {
-        _health -= damage;
-
-        if (_health <= 0)
+        if (Health.GetAmountHealth() <= 0)
             Die();
     }
 

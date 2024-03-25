@@ -13,7 +13,7 @@ public class PatrolState : EnemyPatrolState
     {
         _waypointMovement.MoveToPoint();
 
-        if (_enemyPatrol.CheckTargetInSight(_enemyPatrol.VisibilityRange))
+        if (_enemyPatrol.Target != null)
             _enemyPatrol.SetState(EnemyPatrolStateType.Follow);
     }
 

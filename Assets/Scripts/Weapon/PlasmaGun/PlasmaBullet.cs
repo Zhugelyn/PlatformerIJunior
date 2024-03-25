@@ -16,7 +16,7 @@ public class PlasmaBullet : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out EnemyPatrol enemy))
         {
-            enemy.TakeDamge(_damage);
+            enemy.Health.TakeDamage(_damage);
         }
 
         Destroy(gameObject);

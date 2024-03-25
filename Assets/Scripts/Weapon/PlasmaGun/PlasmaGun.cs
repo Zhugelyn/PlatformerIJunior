@@ -7,8 +7,6 @@ public class PlasmaGun : MonoBehaviour, IRangeWeapon
 
     public void Shoot(Vector3 targetPositon)
     {
-        var rotationY = transform.localScale.x > 0 ? 0 : 180;
-        var rotation = Quaternion.Euler(0, rotationY, 0);
-        var bullet = Instantiate(_bulletPrefab, _shootingPoint.position, rotation);
+        Instantiate(_bulletPrefab, _shootingPoint.position, _shootingPoint.rotation);
     }
 }

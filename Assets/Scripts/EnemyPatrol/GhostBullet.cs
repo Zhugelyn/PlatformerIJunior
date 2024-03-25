@@ -21,11 +21,9 @@ public class GhostBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Atta");
-
         if (collision.gameObject.TryGetComponent(out Player player))
         {
-            player.TakeDamge(_damage);
+            player.Health.TakeDamage(_damage);
         }
 
         Destroy(gameObject);

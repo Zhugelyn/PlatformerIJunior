@@ -2,5 +2,11 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    public int AmountCoinsAdded { get; private set; }
+    private int AmountCoinsAdded { get; set; } = 1;
+
+    public void AddCoins(Player player)
+    {
+        player.AddCoin(AmountCoinsAdded);
+        Destroy(gameObject);
+    }
 }
