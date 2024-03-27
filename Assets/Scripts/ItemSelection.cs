@@ -5,15 +5,15 @@ public class ItemSelection : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Player player = this.gameObject.GetComponent<Player>();
-        GameObject gameObject = collision.gameObject;
+        Player player = gameObject.GetComponent<Player>();
+        GameObject item = collision.gameObject;
 
-        if (gameObject.TryGetComponent(out Firstaidkit firstaidkit))
+        if (item.TryGetComponent(out Firstaidkit firstaidkit))
         {
             firstaidkit.RestoreHealth(player);
         }
 
-        if (gameObject.TryGetComponent(out Coin coin))
+        if (item.TryGetComponent(out Coin coin))
         {
             coin.AddCoins(player);
         }

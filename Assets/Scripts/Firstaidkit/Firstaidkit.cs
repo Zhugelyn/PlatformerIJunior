@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class Firstaidkit : MonoBehaviour
 {
-    private int AmountHealthRestored { get; set; } = 20;
+    private int _healthRestored = 20;
 
     public void RestoreHealth(Player player)
     {
-        player.Health.Restore(AmountHealthRestored, player.MaxHealth);
+        player.Health.Restore(_healthRestored, player.MaxHealth);
         Destroy(gameObject);
     }
 }

@@ -4,19 +4,19 @@ public class Health : IDamagable
 {
     public event Action HealthDecreased;
 
-    private int Amount { get; set; }
+    private int Count { get; set; }
 
     public void Init(int amount)
     {
-        Amount = amount;
+        Count = amount;
     }
 
     public void TakeDamage(int damage)
     {
-        if (Amount < 0)
+        if (Count < 0)
             return;
 
-        Amount -= damage;
+        Count -= damage;
         HealthDecreased?.Invoke();
     }
 
@@ -25,13 +25,13 @@ public class Health : IDamagable
         if (recovery < 0)
             return;
 
-        bool isMoreMaxHealth = Amount + recovery > maxHealth;
+        bool isMoreMaxHealth = Count + recovery > maxHealth;
 
-        Amount = isMoreMaxHealth ? maxHealth : Amount + recovery;
+        Count = isMoreMaxHealth ? maxHealth : Count + recovery;
     }
 
     public int GetAmountHealth()
     {
-        return Amount;
+        return Count;
     }
 }
