@@ -25,12 +25,12 @@ public class Player : MonoBehaviour, IAttacking
 
     private void OnEnable()
     {
-        Health.HealthDecreased += CheckHealth;
+        Health.Die += Die;
     }
 
     private void OnDisable()
     {
-        Health.HealthDecreased -= CheckHealth;
+        Health.Die -= Die;
     }
 
     public void AddCoin(int amountCoin)
@@ -46,10 +46,9 @@ public class Player : MonoBehaviour, IAttacking
         }
     }
 
-    public void CheckHealth()
+    public void RestoreHealth(int recovery)
     {
-        if (Health.GetAmountHealth() <= 0)
-            Die();
+        Health.Restore(recovery, MaxHealth);
     }
 
     private void Die()

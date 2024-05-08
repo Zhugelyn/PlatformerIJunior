@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class EnemyPatrolState : MonoBehaviour
 {
-    protected EnemyPatrol _enemyPatrol;
+    protected EnemyPatrol EnemyPatrol;
 
     public virtual void GetWaypointMovement(WaypointMovement waypointMovement)
     {
@@ -10,7 +10,7 @@ public abstract class EnemyPatrolState : MonoBehaviour
 
     public virtual void Init(EnemyPatrol enemyPatrol) 
     {
-        _enemyPatrol = enemyPatrol;
+        EnemyPatrol = enemyPatrol;
     }
 
     public abstract void GuardTerritory();

@@ -1,21 +1,25 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Player))]
 public class ItemSelection : MonoBehaviour
 {
+    public event Action<GameObject> Selected;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Player player = gameObject.GetComponent<Player>();
-        GameObject item = collision.gameObject;
 
-        if (item.TryGetComponent(out Firstaidkit firstaidkit))
+        if (collision.gameObject.TryGetComponent(out Firstaidkit firstaidkit))
         {
-            firstaidkit.RestoreHealth(player);
+            player.RestoreHealth(firstaidkit.HealthRestored);
+            Destroy(firstaidkit.gameObject);
         }
 
-        if (item.TryGetComponent(out Coin coin))
+        if (collision.gameObject.TryGetComponent(out Coin coin))
         {
-            coin.AddCoins(player);
+            player.AddCoin(coin.Count);
+            Selected?.Invoke(coin.gameObject);
         }
     }
 }

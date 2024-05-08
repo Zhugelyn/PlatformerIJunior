@@ -4,8 +4,19 @@ public class CoinGenerator : MonoBehaviour
 {
     [SerializeField] private Coin _template;
     [SerializeField] private Transform _spawnCoins;
+    [SerializeField] private ItemSelection _itemSelection;
 
     private Transform[] _spawns;
+
+    private void OnEnable()
+    {
+        _itemSelection.Selected += DestroyCoin;
+    }
+
+    private void OnDisable()
+    {
+        _itemSelection.Selected -= DestroyCoin;
+    }
 
     private void Awake()
     {
@@ -28,6 +39,11 @@ public class CoinGenerator : MonoBehaviour
         {
             Instantiate(_template, _spawns[i].position, Quaternion.identity);
         }
+    }
+
+    private void DestroyCoin(GameObject coin)
+    {
+        Destroy(coin);
     }
 
 }

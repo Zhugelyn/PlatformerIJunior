@@ -13,8 +13,8 @@ public class PatrolState : EnemyPatrolState
     {
         _waypointMovement.MoveToPoint();
 
-        if (_enemyPatrol.Target != null)
-            _enemyPatrol.SetState(EnemyPatrolStateType.Follow);
+        if (EnemyPatrol.Target != null)
+            EnemyPatrol.SetState(EnemyPatrolStateType.Follow);
     }
 
     public override void GetWaypointMovement(WaypointMovement waypointMovement)

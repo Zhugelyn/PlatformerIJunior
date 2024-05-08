@@ -3,6 +3,7 @@ using System;
 public class Health : IDamagable
 {
     public event Action HealthDecreased;
+    public event Action Die;
 
     private int Count { get; set; }
 
@@ -18,6 +19,9 @@ public class Health : IDamagable
 
         Count -= damage;
         HealthDecreased?.Invoke();
+
+        if (Count <= 0)
+            Die?.Invoke();
     }
 
     public void Restore(int recovery, int maxHealth)
@@ -25,9 +29,7 @@ public class Health : IDamagable
         if (recovery < 0)
             return;
 
-        bool isMoreMaxHealth = Count + recovery > maxHealth;
-
-        Count = isMoreMaxHealth ? maxHealth : Count + recovery;
+        Count = Math.Clamp(recovery + Count, Count, maxHealth);
     }
 
     public int GetAmountHealth()

@@ -9,19 +9,19 @@ public class FollowState : EnemyPatrolState
 
     public override void GuardTerritory()
     {
-        if (_enemyPatrol.Target == null)
-            _enemyPatrol.SetState(EnemyPatrolStateType.Patrol);
+        if (EnemyPatrol.Target == null)
+            EnemyPatrol.SetState(EnemyPatrolStateType.Patrol);
 
         Chase();
     }
 
     private void Chase()
     {
-        if (_enemyPatrol.Target == null)
+        if (EnemyPatrol.Target == null)
             return;
 
-        _enemyPatrol.transform.position = Vector2.MoveTowards(_enemyPatrol.transform.position, 
-            _enemyPatrol.Target.transform.position, 
-            _enemyPatrol.Speed * Time.deltaTime);
+        EnemyPatrol.transform.position = Vector2.MoveTowards(EnemyPatrol.transform.position,
+            EnemyPatrol.Target.transform.position,
+            EnemyPatrol.Speed * Time.deltaTime);
     }
 }

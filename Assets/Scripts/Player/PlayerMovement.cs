@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public float defaultSpeed = 10;
 
     private float _horizontalMove;
+    private bool _jump;
     private bool _isRight = true;
     private InputReader _inputReader;
 
@@ -26,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         _horizontalMove = _inputReader.GetHorizontalAxisInput();
-        Jump();
+        Jump(Input.GetKeyDown(KeyCode.W));
         SpeedUp();
     }
 
@@ -37,19 +38,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void HorizontalMovement(float horizontalMove)
     {
-        if (horizontalMove < 0)
+        if (horizontalMove != 0)
         {
             Run(horizontalMove);
 
-            if (_isRight)
+            if (_isRight && horizontalMove < 0)
                 Flip();
-        }
 
-        if (horizontalMove > 0)
-        {
-            Run(horizontalMove);
-
-            if (_isRight == false)
+            if (_isRight == false && horizontalMove > 0)
                 Flip();
         }
 
@@ -57,7 +53,6 @@ public class PlayerMovement : MonoBehaviour
         {
             _animator.SetFloat(_speedHash, 0);
         }
-
     }
 
     private void Run(float horizontalMove)
@@ -66,9 +61,9 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetFloat(_speedHash, _currentSpeed);
     }
 
-    private void Jump()
+    private void Jump(bool jump)
     {
-        if (_inputReader.GetJumpInput())
+        if (jump)
         {
             _rigidbody2D.AddForce(Vector2.up * _forceJump);
             _animator.SetTrigger(_jumpHash);

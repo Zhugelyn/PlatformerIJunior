@@ -45,12 +45,12 @@ public class EnemyPatrol : MonoBehaviour, IAttacking
 
     private void OnEnable()
     {
-        _health.HealthDecreased += CheckHealth;
+        _health.Die += Die;
     }
 
     private void OnDisable()
     {
-        _health.HealthDecreased -= CheckHealth;
+        _health.Die -= Die;
     }
 
     public void SetState(EnemyPatrolStateType stateType)
@@ -90,13 +90,6 @@ public class EnemyPatrol : MonoBehaviour, IAttacking
         _target = null;
 
         return false;
-    }
-
-    public void CheckHealth()
-    {
-        Debug.Log(_health.GetAmountHealth());
-        if (_health.GetAmountHealth() <= 0)
-            Die();
     }
 
     public void Attack()
