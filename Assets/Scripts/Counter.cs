@@ -1,10 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Counter : MonoBehaviour
 {
-    [SerializeField] private TMPro.TextMeshProUGUI _textMeshPro;
+    [SerializeField] private TextMeshProUGUI _textMeshPro;
     [SerializeField] private float _startNumber = 0;
     [SerializeField] private float _delay = 0.5f;
 
@@ -15,8 +15,15 @@ public class Counter : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            _isOn = !_isOn;
-            StartCoroutine(AccountIncrease());
+            if (_isOn == false)
+            {
+                _isOn = true;
+                StartCoroutine(AccountIncrease());
+            }
+            else
+            {
+                _isOn = false;
+            }
         }
     }
 
