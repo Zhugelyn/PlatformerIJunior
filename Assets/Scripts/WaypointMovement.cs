@@ -20,13 +20,14 @@ public class WaypointMovement : MonoBehaviour
 
     public void MoveToPoint()
     {
+        var increment = 1;
         Transform target = _points[_currentPoint];
 
         transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
 
         if (transform.position == target.position)
         {
-            _currentPoint++;
+            _currentPoint = _currentPoint + increment % _points.Length;
 
             if (_currentPoint >= _points.Length)
             {
