@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour, IAttacking
+public class Player : Unit, IAttacking, IDamagable
 {
     [SerializeField] private Rigidbody2D _bulletPrefab;
     [SerializeField] private Transform _spawnBullet;
@@ -8,14 +8,11 @@ public class Player : MonoBehaviour, IAttacking
 
     private int _amountCoint = 0;
     private InputReader _inputReader = new InputReader();
-
-    public int MaxHealth { get; private set; } = 100;
-    public Health Health { get; private set; }
+    private int _maxHealth = 100;
 
     private void Awake()
     {
-        Health = new Health();
-        Health.Init(MaxHealth);
+        Init(_maxHealth);
     }
 
     private void Update()
@@ -48,11 +45,16 @@ public class Player : MonoBehaviour, IAttacking
 
     public void RestoreHealth(int recovery)
     {
-        Health.Restore(recovery, MaxHealth);
+        Health.Restore(recovery);
     }
 
     private void Die()
     {
         Destroy(gameObject);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        Health.TakeDamage(damage);
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyPatrol : MonoBehaviour, IAttacking
+public class EnemyPatrol : Unit, IAttacking, IDamagable
 {
     [Header("stats")]
     [SerializeField] private float _speed = 7f;
@@ -13,19 +13,15 @@ public class EnemyPatrol : MonoBehaviour, IAttacking
     private EnemyPatrolState _currentState;
     private EnemyPatrolStateType _startState = EnemyPatrolStateType.Patrol;
     private WaypointMovement _waypointMovement;
-    private Health _health;
     private float _lastShotTime = 0f;
+    private int _maxHealth = 100;
 
     public float Speed => _speed;
     public Player Target => _target;
-    public Health Health => _health;
-
-    public int MaxHealth { get; private set; } = 100;
 
     private void Awake()
     {
-        _health = new Health();
-        _health.Init(MaxHealth);
+        Init(_maxHealth);
     }
 
     private void Start()
@@ -45,12 +41,13 @@ public class EnemyPatrol : MonoBehaviour, IAttacking
 
     private void OnEnable()
     {
-        _health.Die += Die;
+        //Init(_maxHealth);
+        Health.Die += Die;
     }
 
     private void OnDisable()
     {
-        _health.Die -= Die;
+        Health.Die -= Die;
     }
 
     public void SetState(EnemyPatrolStateType stateType)
@@ -104,5 +101,10 @@ public class EnemyPatrol : MonoBehaviour, IAttacking
     private void Die()
     {
         Destroy(gameObject);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        Health.TakeDamage(damage);
     }
 }

@@ -1,16 +1,18 @@
 using System;
 
-public class Health : IDamagable
+public class Health
 {
-    public event Action HealthDecreased;
+    public event Action<int> Changed;
     public event Action Die;
 
-    private int Count { get; set; }
-
-    public void Init(int amount)
+    public Health(int amount)
     {
         Count = amount;
+        MaxHealth = amount;
     }
+
+    public int MaxHealth { get; private set; }
+    public int Count { get; private set; }
 
     public void TakeDamage(int damage)
     {
@@ -18,18 +20,19 @@ public class Health : IDamagable
             return;
 
         Count -= damage;
-        HealthDecreased?.Invoke();
+        Changed?.Invoke(Count);
 
         if (Count <= 0)
             Die?.Invoke();
     }
 
-    public void Restore(int recovery, int maxHealth)
+    public void Restore(int recovery)
     {
         if (recovery < 0)
             return;
 
-        Count = Math.Clamp(recovery + Count, Count, maxHealth);
+        Count = Math.Clamp(recovery + Count, Count, MaxHealth);
+        Changed?.Invoke(Count);
     }
 
     public int GetAmountHealth()
