@@ -302,7 +302,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bar: {fileID: 4842945413694082002}
-  _smoothingSpeed: 40
   _unit: {fileID: 0}
 --- !u!1 &6152853651541594032
 GameObject:
@@ -332,7 +331,7 @@ RectTransform:
   m_GameObject: {fileID: 6152853651541594032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5428026695604832993}

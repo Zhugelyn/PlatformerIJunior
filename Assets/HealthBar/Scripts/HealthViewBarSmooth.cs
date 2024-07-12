@@ -1,11 +1,23 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthViewBarSmooth : HealthView
 {
     [SerializeField] private Slider _bar;
-    [SerializeField] private int _smoothingSpeed = 20;
     [SerializeField] private Unit _unit;
+
+    private float _smoothingSpeed = 2f;
+
+    private void OnEnable()
+    {
+        _unit.Health.Changed += SetValue;
+    }
+
+    private void OnDisable()
+    {
+        _unit.Health.Changed -= SetValue;
+    }
 
     private void Start()
     {
@@ -13,14 +25,20 @@ public class HealthViewBarSmooth : HealthView
         _bar.value = _unit.Health.MaxHealth;
     }
 
-    private void Update()
+    private void SetValue(int count)
     {
-        if (_unit.Health != null)
-            ChangeHealth(_unit.Health.Count);
+        StartCoroutine(ChangeHealth(count));
     }
 
-    private void ChangeHealth(int count)
+    private IEnumerator ChangeHealth(int count)
     {
-        _bar.value = Mathf.MoveTowards(_bar.value, count, Time.deltaTime * _smoothingSpeed);
+        var delay = 0.05f;
+        var wait = new WaitForSeconds(delay);
+
+        while (_bar.value != count)
+        {
+            _bar.value = Mathf.MoveTowards(_bar.value, count, _smoothingSpeed);
+            yield return wait;
+        }
     }
 }

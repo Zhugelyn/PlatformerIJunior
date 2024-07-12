@@ -41,7 +41,6 @@ public class EnemyPatrol : Unit, IAttacking, IDamagable
 
     private void OnEnable()
     {
-        //Init(_maxHealth);
         Health.Die += Die;
     }
 
