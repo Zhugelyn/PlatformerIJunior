@@ -16,4 +16,6 @@ public class InputReader : MonoBehaviour
     public bool GetAttackInput() => Input.GetKeyDown(KeyCode.Mouse0);
 
     public bool GetBoostInput() => Input.GetKey(KeyCode.LeftShift);
+
+    public bool GetVampirismInput() => Input.GetKey(KeyCode.V);
 }

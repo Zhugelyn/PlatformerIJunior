@@ -34,9 +34,4 @@ public class Health
         Count = Math.Clamp(recovery + Count, Count, MaxHealth);
         Changed?.Invoke(Count);
     }
-
-    public int GetAmountHealth()
-    {
-        return Count;
-    }
 }

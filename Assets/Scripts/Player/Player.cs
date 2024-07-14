@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class Player : Unit, IAttacking, IDamagable
 {
+    [Header("Weapon")]
     [SerializeField] private Rigidbody2D _bulletPrefab;
     [SerializeField] private Transform _spawnBullet;
     [SerializeField] private PlasmaGun _gun;
+
+    [Header("Ability")]
+    [SerializeField] private Vamprism _vamprism;
 
     private int _amountCoint = 0;
     private InputReader _inputReader = new InputReader();
@@ -18,6 +22,7 @@ public class Player : Unit, IAttacking, IDamagable
     private void Update()
     {
         Attack();
+        Vampirize();
     }
 
     private void OnEnable()
@@ -56,5 +61,11 @@ public class Player : Unit, IAttacking, IDamagable
     public void TakeDamage(int damage)
     {
         Health.TakeDamage(damage);
+    }
+
+    private void Vampirize()
+    {
+        if (_inputReader.GetVampirismInput())
+            _vamprism.Activate();
     }
 }
