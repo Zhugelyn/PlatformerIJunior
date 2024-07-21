@@ -868,6 +868,17 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 5373740364483050724, guid: 414cd69ff3819f447b8f9498722c544b, type: 3}
   m_PrefabInstance: {fileID: 1574147513}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1041436912 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 299417147981231037, guid: 414cd69ff3819f447b8f9498722c544b, type: 3}
+  m_PrefabInstance: {fileID: 1574147513}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9d041a6853fa3848876bf4be2af7b14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1085642699
 GameObject:
   m_ObjectHideFlags: 0
@@ -3355,6 +3366,10 @@ PrefabInstance:
       propertyPath: _spriteRenderer
       value: 
       objectReference: {fileID: 1041436909}
+    - target: {fileID: 801683085345258227, guid: 414cd69ff3819f447b8f9498722c544b, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1087256873746202191, guid: 414cd69ff3819f447b8f9498722c544b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -3398,6 +3413,38 @@ PrefabInstance:
     - target: {fileID: 2589608815536092089, guid: 414cd69ff3819f447b8f9498722c544b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980552314918875923, guid: 414cd69ff3819f447b8f9498722c544b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980552314918875923, guid: 414cd69ff3819f447b8f9498722c544b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980552314918875923, guid: 414cd69ff3819f447b8f9498722c544b, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980552314918875923, guid: 414cd69ff3819f447b8f9498722c544b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980552314918875923, guid: 414cd69ff3819f447b8f9498722c544b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980552314918875923, guid: 414cd69ff3819f447b8f9498722c544b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5339789804234959218, guid: 414cd69ff3819f447b8f9498722c544b, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5339789804234959218, guid: 414cd69ff3819f447b8f9498722c544b, type: 3}
+      propertyPath: m_margin.z
+      value: -0.013763428
       objectReference: {fileID: 0}
     - target: {fileID: 5339789804234959218, guid: 414cd69ff3819f447b8f9498722c544b, type: 3}
       propertyPath: m_fontAsset
@@ -3443,6 +3490,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6615086349675758944, guid: 414cd69ff3819f447b8f9498722c544b, type: 3}
+      propertyPath: _vampirism
+      value: 
+      objectReference: {fileID: 1041436912}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

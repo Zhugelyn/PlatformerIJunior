@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,11 +9,18 @@ public class Vamprism : MonoBehaviour, IUsable
     [SerializeField] private int _countPerSecond;
     [SerializeField] private float _duration;
     [SerializeField] private float _cooldown;
+    [SerializeField] private float _delay;
 
     [SerializeField] private Player _player;
-    [SerializeField] private VampirismVisualization _visualization;
 
-    [SerializeField] private bool _isActive = false;
+    public event Action<float, float> Activated;
+    public event Action<float> Deactivated;
+
+    private bool _isActive = false;
+
+    private Coroutine _reload;
+    private Coroutine _getHealthy;
+
 
     public void Activate()
     {
@@ -20,8 +28,8 @@ public class Vamprism : MonoBehaviour, IUsable
         {
             _isActive = true;
 
-            _visualization.VisualizeAbility(_duration);
-            StartCoroutine("GetHealthy");
+            Activated.Invoke(_duration,_delay);
+            _getHealthy = StartCoroutine(GetHealthy());
         }
     }
 
@@ -40,31 +48,28 @@ public class Vamprism : MonoBehaviour, IUsable
 
     public IEnumerator Reload()
     {
-        _visualization.VisualizeReloading(_cooldown);
+        Deactivated?.Invoke(_cooldown);
 
         float delay = 1f;
         var wait = new WaitForSeconds(delay);
-        int i = 0;
 
-        while (_cooldown > i)
-        {
-            i++;
-
+        for (int i = 0; i < _cooldown; i++)
             yield return wait;
-        }
 
         _isActive = false;
 
-        StopCoroutine("Relod");
+        if (_reload != null)
+            StopCoroutine(_reload);
+
+        if (_getHealthy != null)
+            StopCoroutine(_getHealthy);
     }
 
     private IEnumerator GetHealthy()
-    {
-        float delay = 1f;
-        var wait = new WaitForSeconds(delay);
-        float i = 0;
+    { 
+        var wait = new WaitForSeconds(_delay);
 
-        while (_duration > i)
+        for (float i = 0; i < _duration; i+= _delay)
         {
             var enemy = GetNearestEnemy();
 
@@ -74,12 +79,9 @@ public class Vamprism : MonoBehaviour, IUsable
                 _player.RestoreHealth(_countPerSecond);
             }
 
-            i += delay;
-
             yield return wait;
         }
 
-        StartCoroutine("Reload");
-        StopCoroutine("GetHealthy");
+        _reload = StartCoroutine(Reload());
     }
 }
